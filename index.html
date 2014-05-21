@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title></title>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+</head>
+<body>
+  <!-- Layout Only. Unrelated to Demo. -->
+  
+  <!-- DOM elements < data elements (enter)
+DOM elements > data elements (exit)
+DOM elements = data elements (update) -->
+
+
+<script>
+var canvas = d3.select("body").append("svg").attr("width", 1500).attr("height", 1500).append("g").attr("transform", "translate(50, 50)");
+var tree = d3.layout.tree().size([400, 400]);
+d3.json("myjson.json", function(data){
+var nodes = tree.nodes(data);
+var links = tree.links(nodes);
+var node = canvas.selectAll(".node").data(nodes).enter().append("g").attr("class", "node").attr("transform", function(d){return "translate(" + d.x + "," + d.y + ")";});
+node.append("circle").attr("r", 5).attr("fill", "steelblue");
+node.append("text").text(function(d){return d.name;})
+var diagonal = d3.svg.diagonal().projection(function(d){return d.x, d.y});
+canvas.selectAll(".link").data(links).enter("path").attr("class", "link").attr("fill", "none").attr("stroke", "#ADADAD").attr("d", diagonal);
+})
+</script>
+</body>
+</html> 

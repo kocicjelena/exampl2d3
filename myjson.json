@@ -1,0 +1,19 @@
+{
+"name": "M", 
+"children":[
+    {
+    "name": "S",
+    "children": =[
+	{"name": "C"}, 
+	{"name": "C"}
+	]
+    },
+    {
+    "name": "D",
+    "children": [
+    {"name": "F", "size": 50},
+    {"name": "Franc", "size": 12}
+    ]
+	}
+	]
+}
