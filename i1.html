@@ -17,16 +17,17 @@ DOM elements = data elements (update) -->
 
 
 <script>
-var width = 800;
-    height = 600;
-var canvas = d3.select("body").append("svg").attr("width", 500).attr("height", 500).append("g").attr("transform", "translate(50, 50)");
-var pack = d3.layout.pack().size([width, height - 50]).padding(10);
-d3.json("value.json", function(data){
-var nodes = pack.nodes(data);
+var canvas = d3.select("body").append("svg").attr("width", 1500).attr("height", 1500).append("g").attr("transform", "translate(50, 50)");
+var tree = d3.layout.tree().size([400, 400]);
+d3.json("myjson.json", function(data){
+var nodes = tree.nodes(data);
+var links = tree.links(nodes);
 var node = canvas.selectAll(".node").data(nodes).enter().append("g").attr("class", "node").attr("transform", function(d){return "translate(" + d.x + "," + d.y + ")";});
-node.append("circle").attr("r", function(d){}).attr("fill", "steelblue").attr("opacity", 0.25).attr("stroke", "#ADADAD").attr("stroke-width", "2");
-node.append("text").text(function(d){return d.children ? "" : d.name;})
-console.log(nodes);});
+node.append("circle").attr("r", 5).attr("fill", "steelblue");
+node.append("text").text(function(d){return d.name;})
+var diagonal = d3.svg.diagonal().projection(function(d){return d.x, d.y});
+canvas.selectAll(".link").data(links).enter("path").attr("class", "link").attr("fill", "none").attr("stroke", "#ADADAD").attr("d", diagonal);
+})
 </script>
 </body>
 </html> 
