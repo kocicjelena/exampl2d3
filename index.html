@@ -19,7 +19,7 @@ DOM elements = data elements (update) -->
 <script>
 var canvas = d3.select("body").append("svg").attr("width", 1500).attr("height", 1500).append("g").attr("transform", "translate(50, 50)");
 var tree = d3.layout.tree().size([400, 400]);
-d3.json("myjson.json", function(data){
+d3.json("http://kocicjelena.github.io/exampl2d3/myjson.json", function(data){
 var nodes = tree.nodes(data);
 var links = tree.links(nodes);
 var node = canvas.selectAll(".node").data(nodes).enter().append("g").attr("class", "node").attr("transform", function(d){return "translate(" + d.x + "," + d.y + ")";});
